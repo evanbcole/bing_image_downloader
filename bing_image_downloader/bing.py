@@ -6,6 +6,7 @@ import urllib
 import imghdr
 import posixpath
 import re
+from xmlrpc.client import Boolean
 
 '''
 Python api to download image form Bing.
@@ -59,7 +60,7 @@ class Bing:
             self.download_count -= 1
             print("[!] Issue getting: {}\n[!] Error:: {}".format(link, e))
 
-    def run(self):
+    def run(self) -> bool:
         while self.download_count < self.limit:
             print('\n\n[!!]Indexing page: {}\n'.format(self.page_counter + 1))
             # Parse the page source and download pics
@@ -74,12 +75,15 @@ class Bing:
             print("[%] Indexed {} Images on Page {}.".format(len(links), self.page_counter + 1))
             print("\n===============================================\n")
 
+            if (self.page_counter > 20):
+                return False
+
             for link in links:
                 if self.download_count < self.limit:
                     self.download_image(link)
                 else:
                     print("\n\n[%] Done. Downloaded {} images.".format(self.download_count))
                     print("\n===============================================\n")
-                    break
+                    return True
 
             self.page_counter += 1
