@@ -28,8 +28,8 @@ def download(query, limit=100, output_dir='dataset', adult_filter_off=True, forc
             os.makedirs("{}/{}/".format(cwd, output_dir))
     except:
         pass
-    if not os.path.isdir("{}/{}/{}".format(cwd, output_dir, query)):
-        os.makedirs("{}/{}/{}".format(cwd, output_dir, query))
+    # if not os.path.isdir("{}/{}/{}".format(cwd, output_dir, query)):
+    #     os.makedirs("{}/{}/{}".format(cwd, output_dir, query))
 
     bing = Bing(query, limit, output_dir, adult, timeout)
     bing.run()
