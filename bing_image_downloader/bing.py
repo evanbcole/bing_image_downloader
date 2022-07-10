@@ -52,8 +52,8 @@ class Bing:
             # Download the image
             print("[%] Downloading Image #{} from {}".format(self.download_count, link))
 
-            self.save_image(link, "{}/{}/".format(os.getcwd(), self.output_dir) + "pic-{}.{}".format(
-                str(self.download_count), file_type))
+            self.save_image(link, "{}/{}/".format(os.getcwd(), self.output_dir) + "{}-{}.{}".format(self.query,
+                str(self.download_count), "png"))
             print("[%] File Downloaded !\n")
         except Exception as e:
             self.download_count -= 1
